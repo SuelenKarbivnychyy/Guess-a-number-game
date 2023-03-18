@@ -1,17 +1,6 @@
 """ This a guessing game where the player has to guess a number from 1 to 100 """
-
-#pseudocode:
-#welcome the user and explain the game
-#Tell the user to choose a difficult easy or hard
-#Dependind on what difficult he choose tell him how many attempts he has
-#Tell him to make a guess
-#if guess is correct, the game ends and the user won
-#if guess is not correct:
-#   check if he still have attempts
-#   if does, display how many attempts remainding and ask to guess again
-#   if user out of attempts he lose
-
 import random
+import art
 
 
 def return_number_of_attempts(difficult):
@@ -25,46 +14,49 @@ def return_number_of_attempts(difficult):
         return attempts
     else:
         return "This is not value"
+    
 
-def play_game(guess):
-    # attempts = return_number_of_attempts(difficult)
+def check_guess(guess, choose_number):
+    """Check if the guess is correct"""
 
     if guess < 1 or guess > 100:
         print("Not value number, Please choose a number beetween 1 and 100.")
-        # return is_game_over
+        return False
     elif int(guess) == choose_number:
-        print("You won")
-        is_game_over = True
-        return is_game_over
-    else:   
-         
-        if attempts != 1:
-            attempts -= 1 
-            print(f"THIS SHOULD BE THE NUMBER OF ATTEMPTS: {attempts}")
-            if guess > choose_number:
-                print("Your guess is too higly.")                
-                return is_game_over
-            elif guess < choose_number:
-                print("Your guess is too low.")                 
-                return is_game_over           
+        print("You won")       
+        return True
+    else:
+        if guess > choose_number:
+            print("Your guess is too high.")                
+            return False
+        elif guess < choose_number:
+            print("Your guess is too low.")                 
+            return False   
+
+
+def play_game(choose_number):
+    """Play the guessing number game"""
+    print(art.logo)
+
+    print("Welcome to the guessing number game.\nI'm thinking of a number between 1 and 100.")
+    difficult = input("Choose your difficult typing 'easy' or 'hard': ").lower()
+    number_of_attempts = return_number_of_attempts(difficult) 
+
+    guess = int(input(f"You have {number_of_attempts} attempts remaining, make a guess: "))
+    number_of_attempts -= 1
+    is_game_over = False
+
+    while is_game_over == False and check_guess(guess, choose_number) == False: 
+
+        if number_of_attempts > 0:
+            guess = int(input(f"You have {number_of_attempts} attempts remaining, make a guess: "))
+            number_of_attempts -= 1            
+            print(guess)
         else:
-            print("You are out of attempts")
-            is_game_over = True 
-            return is_game_over  
-        
+            print("You are out of attempts. You lose") 
+            is_game_over = True        
 
+choose_number1 = random.randint(1, 101)      
+play_game(choose_number1)          
 
-print("Welcome to the guessing number game.\nI'm thinking of a number between 1 and 100.")
-difficult = input("Choose your difficult typing 'easy' or 'hard': ").lower()
-choose_number = random.randint(1, 101)
-# print(choose_number)
-
-attempts = return_number_of_attempts(difficult)
-
-is_game_over = False
-while not is_game_over:  
-    
-    guess = int(input(f"You have attempts remaining, make a guess: "))
-    # print(guess)
-
-play_game(guess)        
+  
