@@ -8,12 +8,10 @@ def return_number_of_attempts(difficult):
 
     if difficult == "easy":
         attempts = 10      
-        return attempts
-    elif difficult == "hard":
+        return attempts            
+    else:
         attempts = 5        
         return attempts
-    else:
-        return "This is not value"
     
 
 def check_guess(guess, choose_number):
