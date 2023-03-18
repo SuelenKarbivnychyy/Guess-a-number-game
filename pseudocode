@@ -1,0 +1,10 @@
+#pseudocode:
+#welcome the user and explain the game
+#Tell the user to choose a difficult easy or hard
+#Dependind on what difficult he choose tell him how many attempts he has
+#Tell him to make a guess
+#if guess is correct, the game ends and the user won
+#if guess is not correct:
+#   check if he still have attempts
+#   if does, display how many attempts remainding and ask to guess again
+#   if user out of attempts he lose
